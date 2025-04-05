@@ -52,7 +52,7 @@ export function FashionItemsList() {
 
   useEffect(() => {
     fetchItems()
-  }, [gender, limit])
+  }, [gender, limit, fetchItems])
 
   const filteredItems = items.filter((item) => {
     if (!searchTerm) return true
