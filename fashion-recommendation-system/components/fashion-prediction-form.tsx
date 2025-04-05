@@ -31,7 +31,7 @@ const articleTypeOptions = ["T-shirts", "Shirts", "Casual Shoes", "Sports Shoes"
 const baseColourOptions = ["Black", "White", "Blue", "Red", "Green", "Yellow", "Pink", "Grey", "Brown"];
 const seasonOptions = ["Summer", "Fall", "Winter", "Spring"];
 
-export function FashionPredictionForm() {
+function FashionPredictionForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [prediction, setPrediction] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -88,7 +88,7 @@ export function FashionPredictionForm() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
+            <FormField
                 control={form.control}
                 name="gender"
                 render={({ field }) => (
@@ -297,4 +297,5 @@ export function FashionPredictionForm() {
     </Card>
   );
 }
-export default { FashionPredictionForm };
+
+export default FashionPredictionForm;

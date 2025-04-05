@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 // Correct dynamic imports for named exports
 const FashionPredictionForm = dynamic(
-  () => import('@/components/fashion-prediction-form').then((mod) => mod.FashionPredictionForm),
+  () => import('@/components/fashion-prediction-form'),
   { ssr: false }
 );
 
@@ -19,7 +19,7 @@ const DataUpload = dynamic(
 );
 
 const ModelRetraining = dynamic(
-    () => import('@/components/model-retraining').then((mod) => mod.ModelRetraining),
+    () => import('@/components/model-retraining'),
     { ssr: false }
   );
 

@@ -1,8 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Loader2, Upload, AlertCircle, CheckCircle2, FileText } from "lucide-react"
@@ -15,6 +13,7 @@ export function DataUpload() {
   const [uploadProgress, setUploadProgress] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -40,7 +39,6 @@ export function DataUpload() {
     setError(null)
     setSuccess(null)
 
-    // Simulate upload progress
     const progressInterval = setInterval(() => {
       setUploadProgress((prev) => {
         if (prev >= 95) {
@@ -71,9 +69,9 @@ export function DataUpload() {
       const data = await response.json()
       setSuccess(data.message)
       setFile(null)
-      // Reset the file input
-      const fileInput = document.getElementById("csv-upload") as HTMLInputElement
-      if (fileInput) fileInput.value = ""
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ""
+      }
     } catch (err) {
       setUploadProgress(0)
       setError(err instanceof Error ? err.message : "An error occurred during upload")
@@ -110,6 +108,7 @@ export function DataUpload() {
                 <Upload className="mr-2 h-4 w-4" />
                 Select CSV File
                 <input
+                  ref={fileInputRef}
                   id="csv-upload"
                   type="file"
                   accept=".csv"
@@ -135,8 +134,9 @@ export function DataUpload() {
                 size="sm"
                 onClick={() => {
                   setFile(null)
-                  const fileInput = document.getElementById("csv-upload") as HTMLInputElement
-                  if (fileInput) fileInput.value = ""
+                  if (fileInputRef.current) {
+                    fileInputRef.current.value = ""
+                  }
                 }}
                 disabled={uploading}
               >
@@ -187,4 +187,5 @@ export function DataUpload() {
   )
 }
 
-export default { DataUpload };
+// Fixed export
+export default DataUpload

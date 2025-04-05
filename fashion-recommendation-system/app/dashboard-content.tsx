@@ -3,9 +3,10 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import dynamic from "next/dynamic";
 
+
 // Dynamic imports with proper loading states
 const FashionPredictionForm = dynamic(
-  () => import("@/components/fashion-prediction-form").then(mod => mod.FashionPredictionForm),
+  () => import("@/components/fashion-prediction-form"),
   { 
     ssr: false,
     loading: () => <div className="p-4 text-center">Loading prediction form...</div>
@@ -29,7 +30,7 @@ const DataUpload = dynamic(
 );
 
 const ModelRetraining = dynamic(
-  () => import("@/components/model-retraining").then(mod => mod.ModelRetraining),
+  () => import("@/components/model-retraining"),
   { 
     ssr: false,
     loading: () => <div className="p-4 text-center">Loading retraining panel...</div>
@@ -44,7 +45,7 @@ const ModelMetrics = dynamic(
   }
 );
 
-export function DashboardContent() {
+export default function DashboardContent() {
   return (
     <Tabs defaultValue="predict" className="w-full">
       <TabsList className="grid w-full grid-cols-5">

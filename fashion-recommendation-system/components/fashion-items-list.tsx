@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -29,7 +29,7 @@ export function FashionItemsList() {
   const [searchTerm, setSearchTerm] = useState<string>("")
   const [limit, setLimit] = useState<number>(10)
 
-  const fetchItems = async () => {
+  const fetchItems = useCallback(async () => {
     setLoading(true)
     setError(null)
     try {
@@ -48,11 +48,11 @@ export function FashionItemsList() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [gender, limit])
 
   useEffect(() => {
     fetchItems()
-  }, [gender, limit, fetchItems])
+  }, [fetchItems])
 
   const filteredItems = items.filter((item) => {
     if (!searchTerm) return true
@@ -180,4 +180,5 @@ export function FashionItemsList() {
   )
 }
 
-export default { FashionItemsList};
+// Fixed export
+export default FashionItemsList

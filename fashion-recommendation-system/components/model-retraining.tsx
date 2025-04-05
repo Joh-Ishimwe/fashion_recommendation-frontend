@@ -7,7 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Loader2, RefreshCw, CheckCircle2, AlertCircle } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 
-export function ModelRetraining() {
+function ModelRetraining() {
   const [isRetraining, setIsRetraining] = useState(false)
   const [progress, setProgress] = useState(0)
   const [result, setResult] = useState<{ success: boolean; message: string } | null>(null)
@@ -65,7 +65,7 @@ export function ModelRetraining() {
         <CardDescription>Retrain the machine learning model using the latest data from the database</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+      <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
           <div className="text-center space-y-4">
             <RefreshCw className="h-12 w-12 mx-auto text-pink-500" />
             <h3 className="text-lg font-medium">Retrain Fashion Recommendation Model</h3>
@@ -134,4 +134,4 @@ export function ModelRetraining() {
   )
 }
 
-export default {ModelRetraining};
+export default ModelRetraining;

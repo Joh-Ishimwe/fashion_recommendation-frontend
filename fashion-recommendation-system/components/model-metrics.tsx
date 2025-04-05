@@ -15,7 +15,7 @@ interface ModelMetrics {
       recall: number
       f1_score: number
       support: number
-    }
+    } | number
   }
 }
 
@@ -102,10 +102,10 @@ export function ModelMetrics() {
                       .map(([className, values]) => (
                         <TableRow key={className}>
                           <TableCell className="font-medium">{className}</TableCell>
-                          <TableCell>{formatPercentage(values.precision)}</TableCell>
-                          <TableCell>{formatPercentage(values.recall)}</TableCell>
-                          <TableCell>{formatPercentage(values.f1_score)}</TableCell>
-                          <TableCell>{values.support}</TableCell>
+                          <TableCell>{typeof values === 'object' ? formatPercentage(values.precision) : 'N/A'}</TableCell>
+                          <TableCell>{typeof values === 'object' ? formatPercentage(values.recall) : 'N/A'}</TableCell>
+                          <TableCell>{typeof values === 'object' ? formatPercentage(values.f1_score) : 'N/A'}</TableCell>
+                          <TableCell>{typeof values === 'object' ? values.support : 'N/A'}</TableCell>
                         </TableRow>
                       ))}
                     {metrics.classification_report["accuracy"] && (
@@ -114,14 +114,18 @@ export function ModelMetrics() {
                         <TableCell colSpan={3}>
                           {formatPercentage(
                             typeof metrics.classification_report["accuracy"] === "number" 
-                            ? metrics.classification_report["accuracy"]
-                             : 0
-                                )}
+                              ? metrics.classification_report["accuracy"]
+                              : 0
+                          )}
                         </TableCell>
-                        <TableCell>{metrics.classification_report["weighted avg"]?.support || "N/A"}</TableCell>
+                        <TableCell>
+                          {typeof metrics.classification_report["weighted avg"] === 'object' 
+                            ? metrics.classification_report["weighted avg"].support 
+                            : "N/A"}
+                        </TableCell>
                       </TableRow>
                     )}
-                    {metrics.classification_report["macro avg"] && (
+                    {typeof metrics.classification_report["macro avg"] === 'object' && (
                       <TableRow>
                         <TableCell className="font-medium">Macro Avg</TableCell>
                         <TableCell>{formatPercentage(metrics.classification_report["macro avg"].precision)}</TableCell>
@@ -130,7 +134,7 @@ export function ModelMetrics() {
                         <TableCell>{metrics.classification_report["macro avg"].support}</TableCell>
                       </TableRow>
                     )}
-                    {metrics.classification_report["weighted avg"] && (
+                    {typeof metrics.classification_report["weighted avg"] === 'object' && (
                       <TableRow>
                         <TableCell className="font-medium">Weighted Avg</TableCell>
                         <TableCell>
@@ -156,4 +160,5 @@ export function ModelMetrics() {
   )
 }
 
-export default { ModelMetrics};
+// Fixed export
+export default ModelMetrics
