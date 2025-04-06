@@ -53,7 +53,7 @@ export function DataUpload() {
       const formData = new FormData()
       formData.append("file", file)
 
-      const response = await fetch("https://fashion-recommendation-rls8.onrender.com/upload_data/", {
+      const response = await fetch("https://fashion-recommendation-og63.onrender.com/upload_data/", {
         method: "POST",
         body: formData,
       })

@@ -28,7 +28,7 @@ export function ModelMetrics() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch("https://fashion-recommendation-rls8.onrender.com/metrics/")
+      const response = await fetch("https://fashion-recommendation-og63.onrender.com/metrics/")
       if (!response.ok) {
         throw new Error("Failed to fetch model metrics")
       }

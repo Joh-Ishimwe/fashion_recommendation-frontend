@@ -29,7 +29,7 @@ function ModelRetraining() {
     }, 500)
 
     try {
-      const response = await fetch("https://fashion-recommendation-rls8.onrender.com/retrain/", {
+      const response = await fetch("https://fashion-recommendation-og63.onrender.com/retrain/", {
         method: "POST",
       })
 

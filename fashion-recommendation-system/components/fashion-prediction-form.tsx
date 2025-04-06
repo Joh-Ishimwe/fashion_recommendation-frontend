@@ -55,7 +55,7 @@ function FashionPredictionForm() {
     setError(null);
 
     try {
-      const response = await fetch("https://fashion-recommendation-rls8.onrender.com/predict/", {
+      const response = await fetch("https://fashion-recommendation-og63.onrender.com/predict/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -33,7 +33,7 @@ export function FashionItemsList() {
     setLoading(true)
     setError(null)
     try {
-      let url = `https://fashion-recommendation-rls8.onrender.com/fashion_items/?limit=${limit}`
+      let url = `https://fashion-recommendation-og63.onrender.com/fashion_items/?limit=${limit}`
       if (gender && gender !== "all") {
         url += `&gender=${gender}`
       }
