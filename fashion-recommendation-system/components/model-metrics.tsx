@@ -77,7 +77,7 @@ export function ModelMetrics() {
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle>Model Performance Metrics</CardTitle>
-          <CardDescription>View the current model's performance metrics and classification report</CardDescription>
+          <CardDescription>View the current models performance metrics and classification report</CardDescription>
         </div>
         <Button variant="outline" size="sm" onClick={fetchMetrics} disabled={loading}>
           <RefreshCw className="h-4 w-4 mr-2" />
