@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { Loader2, RefreshCw, BarChart3 } from "lucide-react"
+import { Loader2, RefreshCw } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 interface ModelMetrics {
@@ -61,11 +61,10 @@ export function ModelMetrics() {
     return new Date(timestamp).toLocaleString()
   }
 
-  // Get all class names from classification report (excluding special keys)
   const classNames = metrics 
-  ? Object.keys(metrics.classification_report).filter(
-      key => !["accuracy", "macro avg", "weighted avg"].includes(key))
-  : []
+    ? Object.keys(metrics.classification_report).filter(
+        key => !["accuracy", "macro avg", "weighted avg"].includes(key))
+    : []
 
   return (
     <Card className="w-full">
@@ -93,7 +92,6 @@ export function ModelMetrics() {
           </Alert>
         ) : metrics ? (
           <div className="space-y-8">
-            {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <MetricCard 
                 title="Accuracy" 
@@ -117,7 +115,6 @@ export function ModelMetrics() {
               />
             </div>
 
-            {/* Dataset Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <MetricCard 
                 title="Training Samples" 
@@ -131,7 +128,6 @@ export function ModelMetrics() {
               />
             </div>
 
-            {/* Classification Report */}
             <div className="border rounded-lg overflow-hidden">
               <div className="bg-gray-50 dark:bg-gray-800 px-6 py-3 border-b">
                 <h3 className="font-medium">Classification Report</h3>
@@ -165,7 +161,6 @@ export function ModelMetrics() {
               </div>
             </div>
 
-            {/* Confusion Matrix */}
             <div className="border rounded-lg overflow-hidden">
               <div className="bg-gray-50 dark:bg-gray-800 px-6 py-3 border-b">
                 <h3 className="font-medium">Confusion Matrix</h3>
@@ -228,4 +223,5 @@ function MetricCard({ title, value, description }: { title: string; value: strin
   )
 }
 
-export default ModelMetrics
+const ModelMetricsComponent = ModelMetrics
+export default ModelMetricsComponent
